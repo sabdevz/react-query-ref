@@ -1,0 +1,22 @@
+{
+  "superheroes": [
+    {
+      "id": 1,
+      "name": "batman",
+      "alterEgo": "bruce wayne",
+      "info": "Batman[a] is a superhero appearing in American comic books published by DC Comics. "
+    },
+    {
+      "id": 2,
+      "name": "superman",
+      "alterEgo": "clark kent",
+      "info": "Superman is a superhero who appears in American comic books published by DC Comics."
+    },
+    {
+      "id": 3,
+      "name": "wonder woman",
+      "alterEgo": "princess diana",
+      "info": "Wonder Woman is a superhero created by the American psychologist and writer William Moulton Marston and artist Harry G. Peter."
+    }
+  ]
+}
