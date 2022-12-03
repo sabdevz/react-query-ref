@@ -19,11 +19,6 @@ const Navbar = () => {
               Superheroes
             </Link>
           </li>
-          <li className='nav-item'>
-            <Link to='/rqsuperheroes' className='nav-link px-2 link-dark'>
-              RQ Superheroes
-            </Link>
-          </li>
         </ul>
       </header>
     </div>

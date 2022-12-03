@@ -1,26 +1,21 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useHero } from '../hooks/useHero';
+import HeroCounter from './HeroCounter';
 
 const Superheroes = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const queryInfo = useHero();
 
-  useEffect(() => {
-    axios.get(`http://localhost:4000/superheroes`).then((res) => {
-      setData(res.data);
-      setIsLoading(false);
-    });
-  }, []);
-
-  if (isLoading) {
-    return;
-  }
-
-  return (
+  return queryInfo.isLoading ? (
+    <h2>loading...</h2>
+  ) : queryInfo.isError ? (
+    <h2>{queryInfo.error.message}</h2>
+  ) : (
     <>
-      <h2>Superheros</h2>
+      <div className='d-flex justify-content-center align-content-center'>
+        <h2>Superheros</h2>
+        <HeroCounter />
+      </div>
       <div className='d-flex justify-content-center .align-items-center'>
-        {data.map((hero) => (
+        {queryInfo.data.map((hero) => (
           <div
             className='card ms-2 mt-3'
             style={{ width: '18rem' }}
@@ -33,7 +28,11 @@ const Superheroes = () => {
             </div>
           </div>
         ))}
+
+        <br />
       </div>
+      {queryInfo.isFetching ? 'Updating .....' : null}
+      <br />
     </>
   );
 };

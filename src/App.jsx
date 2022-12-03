@@ -5,7 +5,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 import Home from './components/Home';
 import Superheroes from './components/Superheroes';
-import RQSuperheros from './components/RQSuperheroes';
 import Navbar from './components/Navbar';
 import './App.css';
 
@@ -17,9 +16,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-
         <Route path='/superheroes' element={<Superheroes />} />
-        <Route path='/rqsuperheroes' element={<RQSuperheros />} />
       </Routes>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
