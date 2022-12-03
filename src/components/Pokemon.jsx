@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { CancelToken } from 'axios';
 import { useState } from 'react';
 import { isError, useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
@@ -7,9 +7,18 @@ const Pokemon = ({ pokemon }) => {
   const queryInfo = useQuery(
     ['pokemon', pokemon],
     () => {
-      return axios
-        .get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
+      const source = CancelToken.source();
+      const promise = axios
+        .get(`https://pokeapi.co/api/v2/pokemon/${pokemon}`, {
+          cancelToken: source.token,
+        })
         .then((res) => res.data);
+
+      promise.cancel = () => {
+        source.cancel('Query was cancelled by RQ');
+      };
+
+      return promise;
     },
     {}
   );
@@ -24,7 +33,7 @@ const Pokemon = ({ pokemon }) => {
       {queryInfo.isLoading ? (
         'loading....'
       ) : isError ? (
-        <h2> {queryInfo.error.message}</h2>
+        <h2> {'queryInfo.error.message'}</h2>
       ) : (
         <div>
           {queryInfo.data?.sprites?.front_default ? (
